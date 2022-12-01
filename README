@@ -1,2 +1,19 @@
 Tiny x86 Bootloader
 
+Then, the following command generates a nice binary from our asm bootloader code.
+
+nasm -f bin boot.asm
+
+Then, in the same directory, whip up a file called bochsrc.txt, and fill it up with the following
+
+megs: 32
+    romimage: file=/usr/share/bochs/BIOS-bochs-latest, address=0xfffe0000
+    vgaromimage: file=/usr/share/bochs/VGABIOS-lgpl-latest
+    floppya: 1_44=boot.com, status=inserted
+    boot: a
+    log: bochsout.txt
+    mouse: enabled=0
+    display_library: x, options="gui_debug"
+    
+    
+bochs -f bochsrc.txt
